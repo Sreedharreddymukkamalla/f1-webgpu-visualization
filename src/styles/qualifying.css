@@ -1,0 +1,262 @@
+/* ============================================================================
+   QUALIFYING SESSION STYLES
+   Sector Timing Widget & Session Timer
+   ============================================================================ */
+
+/* Sector Timing Widget */
+.sector-timing-widget {
+  position: fixed;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 0;
+  min-width: 280px;
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  backdrop-filter: blur(10px);
+  z-index: 900;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.sector-header {
+  background: black;
+  padding: 10px 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.sector-label {
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  font-weight: 600;
+  font-size: 0.85em;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.sector-entries {
+  padding: 10px;
+}
+
+.sector-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  border-left: 3px solid rgb(var(--driver-rgb));
+}
+
+.sector-entry:last-child {
+  margin-bottom: 0;
+}
+
+.sector-driver {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  width: 40px;
+}
+
+.sector-time {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-size: 12px;
+  color: #888;
+  width: 50px;
+  text-align: center;
+  padding: 2px 4px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Sector Status Colors */
+.sector-time.purple {
+  color: #A020F0;
+  background: rgba(160, 32, 240, 0.2);
+  text-shadow: 0 0 8px rgba(160, 32, 240, 0.6);
+  font-weight: 700;
+}
+
+.sector-time.green {
+  color: #00FF00;
+  background: rgba(0, 255, 0, 0.15);
+}
+
+.sector-time.yellow {
+  color: #FFD700;
+  background: rgba(255, 215, 0, 0.15);
+}
+
+.sector-time.none {
+  color: #666;
+}
+
+.lap-time {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-left: auto;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.lap-time.pb {
+  color: #00FF00;
+  background: rgba(0, 255, 0, 0.2);
+}
+
+.no-active {
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+  padding: 15px;
+  font-style: italic;
+}
+
+/* ============================================================================
+   Qualifying Session Timer
+   ============================================================================ */
+
+.quali-timer-widget {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.timer-phase {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 1.2em;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.timer-phase.q1 {
+  background: #FFD700;
+  color: #000;
+}
+
+.timer-phase.q2 {
+  background: #FF6B00;
+  color: #fff;
+}
+
+.timer-phase.q3 {
+  background: #E10600;
+  color: #fff;
+}
+
+.timer-countdown {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.timer-countdown.warning {
+  color: #FFD700;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.timer-countdown.critical {
+  color: #E10600;
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.timer-status {
+  font-size: 0.85em;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timer-status.active {
+  color: #00FF00;
+}
+
+.timer-status.paused {
+  color: #FFD700;
+}
+
+.timer-status.ended {
+  color: #E10600;
+}
+
+/* Sector Best Summary (below timer) */
+.sector-bests-summary {
+  display: flex;
+  gap: 15px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.best-sector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.best-sector-label {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.best-sector-time {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-size: 11px;
+  color: #A020F0;
+  font-weight: 700;
+}
+
+.best-sector-driver {
+  font-size: 9px;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sector-timing-widget {
+    right: 10px;
+    min-width: 240px;
+  }
+  
+  .quali-timer-widget {
+    padding: 8px 15px;
+    gap: 12px;
+  }
+  
+  .timer-countdown {
+    font-size: 1.5em;
+  }
+  
+  .timer-phase {
+    font-size: 1em;
+  }
+}

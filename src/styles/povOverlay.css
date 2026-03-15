@@ -1,0 +1,239 @@
+.pov-hud {
+    position: fixed;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    width: 1200px;
+    height: 300px;
+    pointer-events: none;
+    display: none;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    z-index: 1000;
+}
+
+.pov-hud.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.hud-layout-grid {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 40px;
+}
+
+/* Side Inputs: Far apart and heavily slanted */
+.side-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.side-input.left {
+    align-items: flex-start;
+    transform: perspective(500px) rotateY(15deg) skewX(-10deg);
+}
+
+.side-input.right {
+    align-items: flex-end;
+    transform: perspective(500px) rotateY(-15deg) skewX(10deg);
+}
+
+.input-label-pro {
+    font-size: 14px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-bottom: 5px;
+}
+
+.segments-pro {
+    display: flex;
+    gap: 5px;
+}
+
+.seg-pro {
+    width: 8px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: skewX(-20deg);
+}
+
+.seg-pro.throttle.active {
+    background: #00ff41;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.7);
+}
+
+.seg-pro.brake.active {
+    background: #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+/* Central Cluster: Speed flowing into Gears - Arch Style */
+.central-cluster-pro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(12, 12, 12, 0.95);
+    padding: 20px 60px;
+    border-radius: 40px 40px 10px 10px;
+    border: 1.5px solid rgba(225, 6, 0, 0.4);
+    border-top: 3px solid #e10600;
+    backdrop-filter: blur(15px);
+    position: relative;
+    min-width: 450px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+}
+
+.speed-row-pro {
+    display: flex;
+    align-items: baseline;
+    gap: 25px;
+}
+
+.speed-group-pro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.val-kmh-pro {
+    font-size: 54px;
+    font-weight: 900;
+    line-height: 1;
+    color: #fff;
+}
+
+.val-mph-pro {
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.unit-label-pro {
+    font-size: 11px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: -5px;
+}
+
+.gear-row-pro {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gear-st-pro {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.2);
+    transition: all 0.1s ease;
+}
+
+.gear-st-pro.active {
+    font-size: 36px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.gear-st-pro.neighbor {
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Bottom RPM Bar */
+.rpm-container-pro {
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.rpm-fill-pro {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #fff, #fff 60%, #fff000 80%, #ff0000 100%);
+    transition: width 0.05s linear;
+}
+
+/* Driver Tag: Cleaner integration */
+.driver-tag-pro {
+    align-self: flex-start;
+    margin-top: 25px;
+    margin-left: 100px;
+    background: linear-gradient(to right, rgba(225, 6, 0, 0.2), transparent);
+    border-left: 3px solid #e10600;
+    padding: 6px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.dr-name-pro {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.dr-status-pro {
+    font-size: 14px;
+    color: #e10600;
+    font-weight: 700;
+}
+
+/* DRS Badge: Floating above the center */
+.drs-badge-pro {
+    position: absolute;
+    top: -35px;
+    background: #000;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    padding: 3px 12px;
+    font-size: 11px;
+    font-weight: 900;
+    color: rgba(0, 255, 65, 0.2);
+    border-radius: 2px;
+}
+
+.drs-badge-pro.active {
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 10px #00ff41;
+}
+
+@keyframes hud-shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(0.5px, -0.5px);
+    }
+
+    50% {
+        transform: translate(-0.5px, 0.5px);
+    }
+
+    75% {
+        transform: translate(0.5px, 0.5px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.shake-active {
+    animation: hud-shake 0.05s linear infinite;
+}

@@ -1,0 +1,757 @@
+/* Leaderboard Styles - F1 fonts loaded from main.css */
+
+/* Team Colors - Official F1 2024 */
+.team-color-redbull {
+  background: #4781D7;
+}
+
+.team-color-mercedes {
+  background: #00D7B6;
+}
+
+.team-color-ferrari {
+  background: #ED1131;
+}
+
+.team-color-mclaren {
+  background: #F47600;
+}
+
+.team-color-astonmartin {
+  background: #229971;
+}
+
+.team-color-alpine {
+  background: #00A1E8;
+}
+
+.team-color-williams {
+  background: #1868DB;
+}
+
+.team-color-racingbulls {
+  background: #6C98FF;
+}
+
+.team-color-kicksauber {
+  background: #01C00E;
+}
+
+.team-color-haas {
+  background: #9C9FA2;
+}
+
+.leaderboard {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 40px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px 8px 0 0;
+  padding: 0;
+  width: 240px;
+  overflow-y: visible;
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  backdrop-filter: blur(10px);
+  z-index: 900;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.leaderboard-header {
+  background: black;
+  padding: 8px 15px;
+  /* Compact like quali-header */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.leaderboard-header .f1-logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.lap-counter {
+  background: black;
+  padding: 8px 15px;
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+}
+
+/* LAP label - Titillium Web */
+.lap-counter .lap-label {
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  font-weight: 400;
+  color: #fff;
+}
+
+/* Current lap number - Formula1 Bold */
+.lap-counter .lap-current {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Total laps - Formula1 Regular, 70% opacity */
+.lap-counter .lap-total {
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lap-separator {
+  margin: 5px auto;
+  width: 60%;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* Race Flag Banner - appears below lap counter with slide animation */
+.race-flag-banner {
+  text-align: center;
+  padding: 8px 15px;
+  font-size: 0.85em;
+  font-weight: 700;
+  font-family: 'Formula1', 'Arial', sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  overflow: hidden;
+  /* Slide animation - starts collapsed and slides down */
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: max-height 0.35s ease-out,
+    padding 0.35s ease-out,
+    opacity 0.25s ease-out,
+    transform 0.35s ease-out;
+}
+
+.race-flag-banner.visible {
+  max-height: 40px;
+  padding: 8px 15px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Yellow Flag */
+.race-flag-banner.yellow {
+  background: #FFD700;
+  color: #000;
+  border-bottom: 2px solid #B8A000;
+}
+
+/* Red Flag */
+.race-flag-banner.red {
+  background: #DC143C;
+  color: #fff;
+  border-bottom: 2px solid #8B0000;
+}
+
+/* Safety Car */
+.race-flag-banner.safety-car {
+  background: #FFD700;
+  color: #000;
+  border-bottom: 2px solid #B8A000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* FIA Logo in flag banner */
+.race-flag-banner .flag-logo {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Virtual Safety Car */
+.race-flag-banner.vsc {
+  background: #FFD700;
+  color: #000;
+  border-bottom: 2px solid #B8A000;
+}
+
+.leaderboard-entries {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: transparent;
+  position: relative;
+}
+
+.leaderboard-entry {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 28px;
+}
+
+.leaderboard-entry:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-3px);
+}
+
+.leaderboard-entry.out {
+  opacity: 0.6;
+}
+
+.leaderboard-entry.out .driver-code {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.leaderboard-entry.out .driver-right {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.leaderboard-entry:hover {
+  background: linear-gradient(to left, rgba(var(--driver-rgb), 0.3), transparent) no-repeat right / 50% 100% !important;
+  box-shadow: none;
+}
+
+.leaderboard-entry.selected {
+  background: linear-gradient(to left, rgba(var(--driver-rgb), 0.6), transparent) no-repeat right / 50% 100% !important;
+  box-shadow: none;
+}
+
+/* Remove child backgrounds for selected or hovered entry to avoid the "rectangle" overlap */
+.leaderboard-entry.selected .driver-left,
+.leaderboard-entry.selected .driver-right,
+.leaderboard-entry:hover .driver-left,
+.leaderboard-entry:hover .driver-right {
+  background: transparent !important;
+}
+
+.leaderboard-entry.selected .position {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.driver-left {
+  display: flex;
+  align-items: center;
+  background: black;
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+}
+
+.leaderboard-entry .position {
+  background: transparent;
+  color: white;
+  width: 32px;
+  height: 28px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 28px;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+
+/* First place */
+.leaderboard-entry.leader .position {
+  background: #E10600 !important;
+  color: white;
+}
+
+.team-color-line {
+  width: 2px;
+  height: 20px;
+  margin: 0 10px 0 8px;
+  flex-shrink: 0;
+}
+
+.leaderboard-entry .team-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: brightness(1);
+  transition: filter 0.2s;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.leaderboard-entry:hover .team-logo {
+  filter: brightness(1.2);
+}
+
+.leaderboard-entry.out .team-logo {
+  opacity: 0.5;
+}
+
+.leaderboard-entry .driver-code {
+  font-weight: 700;
+  font-family: 'Formula1', 'Arial', sans-serif;
+  font-size: 13px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.leaderboard-entry .out-label {
+  font-size: 0.7em;
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.2);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: normal;
+}
+
+.leaderboard-entry .pit-label {
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-right: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.leaderboard-entry .pit-label.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.driver-right {
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 13px;
+  padding: 0 10px;
+  text-align: right;
+  color: #fff;
+  min-width: 70px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.position-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+}
+
+.position-change.up {
+  color: #00ff00;
+}
+
+.position-change.down {
+  color: #ff4444;
+}
+
+.position-change.same {
+  color: #888;
+}
+
+.interval-time {
+  font-size: 13px;
+  color: #fff;
+  font-weight: 400;
+}
+
+.leaderboard-entry .indicators {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.leaderboard-entry .drs-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.4);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.leaderboard-entry .drs-indicator.active {
+  background: #00ff00;
+  box-shadow: 0 0 8px #00ff00;
+}
+
+.leaderboard-entry .tyre-indicator {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Scrollbar styling */
+.leaderboard::-webkit-scrollbar {
+  width: 6px;
+}
+
+.leaderboard::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.leaderboard::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.leaderboard::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================================
+   QUALIFYING MODE STYLES
+   ============================================================================ */
+
+/* Qualifying Mode Styles */
+.leaderboard.qualifying-mode {
+  width: 240px;
+  /* Same as race mode */
+}
+
+/* Qualifying Header */
+.quali-header {
+  background: black;
+  padding: 8px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9em;
+  /* Match lap-counter */
+}
+
+.quali-timer {
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.quali-timer.warning {
+  color: #FFD700;
+  animation: timer-pulse 1s ease-in-out infinite;
+}
+
+.quali-timer.ended {
+  color: #E10600;
+}
+
+.quali-timer.paused {
+  color: #ff6b6b;
+  animation: timer-paused-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes timer-paused-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes timer-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.quali-phase {
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* Qualifying Entry Styles */
+.qualifying-mode .leaderboard-entry {
+  height: 28px;
+}
+
+.qualifying-mode .driver-left {
+  height: 28px;
+}
+
+.qualifying-mode .driver-right {
+  height: 28px;
+}
+
+/* Qualifying Times Display */
+.driver-right.quali-times {
+  min-width: 70px;
+  /* Same as race mode's .driver-right */
+  gap: 6px;
+  /* Same as race mode */
+}
+
+.quali-time {
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.quali-time.best-time {
+  font-weight: 400;
+}
+
+/* Eliminated Label */
+.eliminated-label {
+  font-family: 'Titillium Web', 'Arial', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #ffffff;
+  background: transparent;
+  padding: 2px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Danger Zone (elimination zone) */
+.leaderboard-entry.danger-zone {
+  background: linear-gradient(to right, rgba(255, 68, 68, 0.15), rgba(255, 68, 68, 0.25)) !important;
+}
+
+.leaderboard-entry.danger-zone .position {
+  background: rgba(255, 68, 68, 0.3);
+  color: #ff6b6b;
+}
+
+.leaderboard-entry.danger-zone:hover {
+  background: linear-gradient(to right, rgba(255, 68, 68, 0.25), rgba(255, 68, 68, 0.35)) !important;
+}
+
+/* Eliminated Driver */
+.leaderboard-entry.eliminated {
+  opacity: 0.6;
+}
+
+.leaderboard-entry.eliminated .driver-code {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.leaderboard-entry.eliminated .quali-time {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Safe Zone (top positions) - subtle green tint for pole position */
+.qualifying-mode .leaderboard-entry.leader {
+  background: linear-gradient(to right, rgba(0, 200, 0, 0.1), transparent) !important;
+}
+
+.qualifying-mode .leaderboard-entry.leader .position {
+  background: #E10600;
+  color: white;
+}
+
+/* Sector Colors (for future sector timing widget) */
+.sector-purple {
+  color: #A020F0 !important;
+  text-shadow: 0 0 5px rgba(160, 32, 240, 0.5);
+}
+
+.sector-green {
+  color: #00FF00 !important;
+}
+
+.sector-yellow {
+  color: #FFD700 !important;
+}
+
+/* Responsive - Mobile (portrait and landscape) */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .leaderboard {
+    left: 10px;
+    top: 10px;
+    transform: none;
+    width: 200px;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Contain scrolling content */
+  }
+
+  .leaderboard-entries {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0; /* Required for flex children to scroll properly */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* On mobile, switch to relative positioning for proper scrolling */
+  .leaderboard-entry {
+    position: relative !important;
+    transform: none !important;
+    min-height: 26px;
+    height: 26px;
+    order: var(--position, 0); /* Order by position to ensure correct display */
+  }
+
+  /* Limit visible height to approximately 10 entries */
+  .leaderboard-entries {
+    max-height: 230px;
+  }
+
+  .driver-left {
+    height: 26px;
+  }
+
+  .driver-right {
+    min-width: 55px;
+    font-size: 11px;
+    height: 26px;
+  }
+
+  .leaderboard-entry .position {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    line-height: 26px;
+  }
+
+  .leaderboard-entry .driver-code {
+    font-size: 11px;
+  }
+
+  .leaderboard-entry .team-logo {
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+  }
+
+  .team-color-line {
+    height: 16px;
+    margin: 0 6px 0 4px;
+  }
+
+  .leaderboard.qualifying-mode {
+    width: 200px;
+  }
+
+  .quali-time {
+    font-size: 10px;
+  }
+
+  .leaderboard-header {
+    padding: 6px 10px;
+    flex-shrink: 0; /* Prevent header from shrinking */
+  }
+
+  .leaderboard-header .f1-logo {
+    height: 22px;
+  }
+
+  .lap-counter {
+    padding: 6px 10px;
+    font-size: 0.8em;
+    flex-shrink: 0; /* Prevent lap counter from shrinking */
+  }
+
+  .quali-header {
+    flex-shrink: 0; /* Prevent quali header from shrinking */
+  }
+
+  .race-flag-banner {
+    flex-shrink: 0; /* Prevent flag banner from shrinking */
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .leaderboard {
+    left: 5px;
+    top: 5px;
+    width: 180px;
+    max-height: 50vh;
+  }
+
+  .leaderboard-entry {
+    height: 24px;
+    min-height: 24px;
+  }
+
+  .driver-left {
+    height: 24px;
+  }
+
+  .driver-right {
+    height: 24px;
+    min-width: 50px;
+    font-size: 10px;
+    padding: 0 6px;
+  }
+
+  .leaderboard-entry .position {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+    line-height: 24px;
+  }
+
+  .leaderboard-entry .driver-code {
+    font-size: 10px;
+  }
+
+  .leaderboard-entry .team-logo {
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+  }
+
+  .team-color-line {
+    height: 14px;
+    margin: 0 4px;
+  }
+
+  .leaderboard.qualifying-mode {
+    width: 180px;
+  }
+}
+
+/* Scrollbar styling for mobile */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .leaderboard-entries::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .leaderboard-entries::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+  }
+
+  .leaderboard-entries::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+  }
+
+  .leaderboard-entries::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}

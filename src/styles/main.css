@@ -1,0 +1,234 @@
+/* Import component styles */
+@import './renderSettings.css';
+
+/* F1 Official Fonts */
+@font-face {
+  font-family: 'Formula1';
+  src: url('/fonts/headers/Formula1-Regular_web_0.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Formula1';
+  src: url('/fonts/headers/Formula1-Bold_web_0.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Formula1-Wide';
+  src: url('/fonts/headers/Formula1-Wide_web_0.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Titillium Web', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #000;
+  color: #fff;
+  /* Support for notched phones */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Headers use F1 font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Formula1', 'Arial', sans-serif;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* lil-gui styling */
+.lil-gui {
+  --background-color: rgba(0, 0, 0, 0.85);
+  --widget-color: rgba(255, 255, 255, 0.1);
+  --focus-color: #e10600;
+  --hover-color: rgba(255, 255, 255, 0.15);
+  --font-size: 13px;
+  --name-width: 45%;
+  --slider-knob-width: 3px;
+  z-index: 1000;
+}
+
+.lil-gui.root {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lil-gui .title {
+  background: rgba(225, 6, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Info overlay */
+.info-overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.info-overlay h2 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #e10600;
+  font-weight: 600;
+}
+
+.info-overlay p {
+  margin: 5px 0;
+  color: #ccc;
+}
+
+.info-overlay strong {
+  color: #fff;
+}
+
+.circuit-select {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.circuit-select:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.circuit-select:focus {
+  outline: none;
+  border-color: #e10600;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.circuit-select option {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+/* Controls info */
+.controls-info {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.controls-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #e10600;
+  font-weight: 600;
+}
+
+.controls-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.controls-info li {
+  margin: 4px 0;
+  color: #999;
+}
+
+.controls-info kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 12px;
+  color: #fff;
+  margin-right: 5px;
+}
+
+/* Loading indicator */
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 200;
+}
+
+.loading h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #e10600;
+}
+
+.loading p {
+  color: #999;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  margin: 20px auto;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #e10600;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

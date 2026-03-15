@@ -1,0 +1,103 @@
+/* Weather Widget Styles - F1 fonts loaded from main.css */
+
+.weather-widget {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    width: 180px;
+    font-family: 'Titillium Web', 'Arial', sans-serif;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.weather-header {
+    background: black;
+    padding: 10px 14px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Formula1', 'Arial', sans-serif;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.weather-header .weather-icon {
+    width: 16px;
+    height: 16px;
+    color: #FFD700;
+}
+
+.weather-content {
+    padding: 10px 14px;
+}
+
+.weather-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.weather-row:last-child {
+    border-bottom: none;
+}
+
+.weather-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.weather-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.weather-value.dry {
+    color: #00D7B6;
+}
+
+.weather-value.raining {
+    color: #00A1E8;
+    animation: rain-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes rain-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .weather-widget {
+        right: 10px;
+        top: 10px;
+        width: 160px;
+    }
+
+    .weather-label {
+        font-size: 9px;
+    }
+
+    .weather-value {
+        font-size: 11px;
+    }
+}

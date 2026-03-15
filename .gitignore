@@ -1,0 +1,53 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# FastF1 cache
+.fastf1-cache/
+*.ff1pkl
+*.sqlite
+
+# Computed data cache
+backend/python/computed_data/
+*.json
+
+# Telemetry data (large files)
+public/data/telemetry/**/*.json
+public/data/telemetry/**/*.msgpack
+
+# Environment variables
+.env
+.env.local
+.env.*.local
