@@ -46,7 +46,7 @@ export class RenderSettings {
         return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
       }
     } catch (error) {
-      console.error('Failed to load render settings:', error);
+
     }
     return { ...DEFAULT_SETTINGS };
   }
@@ -55,7 +55,7 @@ export class RenderSettings {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.settings));
     } catch (error) {
-      console.error('Failed to save render settings:', error);
+
     }
   }
 

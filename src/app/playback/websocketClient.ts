@@ -134,7 +134,7 @@ export class WebSocketClient {
         this.ws = new WebSocket(this.url);
 
         this.ws.onopen = () => {
-          console.log('✅ WebSocket connected');
+
           this.reconnectAttempts = 0;
           this.onConnectedCallbacks.forEach(cb => cb());
           resolve();
@@ -145,17 +145,17 @@ export class WebSocketClient {
             const message = JSON.parse(event.data);
             this.handleMessage(message);
           } catch (error) {
-            console.error('Failed to parse WebSocket message:', error);
+
           }
         };
 
         this.ws.onerror = (error) => {
-          console.error('WebSocket error:', error);
+
           reject(error);
         };
 
         this.ws.onclose = () => {
-          console.log('WebSocket disconnected');
+
           this.onDisconnectedCallbacks.forEach(cb => cb());
           this.attemptReconnect();
         };
@@ -168,7 +168,7 @@ export class WebSocketClient {
   private handleMessage(message: any): void {
     switch (message.type) {
       case 'metadata':
-        console.log('📊 Received metadata:', message.data);
+
         this.onMetadataCallbacks.forEach(cb => cb(message.data));
         break;
 
@@ -179,25 +179,25 @@ export class WebSocketClient {
         break;
 
       case 'status':
-        console.log('Status:', message.message);
+
         break;
 
       case 'modeChanged':
-        console.log(`🔄 Streaming mode changed to: ${message.config?.name}`);
+
         this.onModeChangeCallbacks.forEach(cb => cb(message.mode, message.config));
         break;
 
       case 'modes':
-        console.log('📋 Available modes:', message.modes);
+
         this.onModesReceivedCallbacks.forEach(cb => cb(message.modes, message.current));
         break;
 
       case 'error':
-        console.error('Server error:', message.message);
+
         break;
 
       default:
-        console.warn('Unknown message type:', message.type);
+
     }
   }
 
@@ -205,7 +205,7 @@ export class WebSocketClient {
     if (this.ws?.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify({ command, value }));
     } else {
-      console.warn('WebSocket not connected, cannot send command:', command);
+
     }
   }
 
@@ -235,7 +235,7 @@ export class WebSocketClient {
   }
 
   setStreamingMode(mode: 'replay' | 'live' | 'polling'): void {
-    console.log(`📡 Setting streaming mode to: ${mode}`);
+
     this.sendCommand('mode', mode);
   }
 
@@ -287,15 +287,15 @@ export class WebSocketClient {
   private attemptReconnect(): void {
     if (this.reconnectAttempts < this.maxReconnectAttempts) {
       this.reconnectAttempts++;
-      console.log(`Reconnecting... (attempt ${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+
 
       setTimeout(() => {
         this.connect().catch((error) => {
-          console.error('Reconnection failed:', error);
+
         });
       }, this.reconnectDelay);
     } else {
-      console.error('Max reconnect attempts reached. Please refresh the page.');
+
     }
   }
 

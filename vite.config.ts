@@ -6,6 +6,7 @@ export default defineConfig({
 
   // Serve data directory as static assets
   server: {
+    host: true,
     fs: {
       allow: ['..'],
     },

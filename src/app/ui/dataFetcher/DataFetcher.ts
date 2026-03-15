@@ -1,11 +1,8 @@
 import { RenderSettings, type RenderSettingsConfig } from '../RenderSettings.js';
 import { raceDataApi } from './api/raceDataApi';
-import { Terminal } from './components/Terminal';
 import { 
-  renderYearSelector, 
   renderRaceSelector, 
-  renderSessionSelector,
-  renderAuthSection 
+  renderSessionSelector
 } from './components/Selectors';
 import type { Race, Session, CachedRaces } from './types';
 
@@ -18,19 +15,17 @@ export class DataFetcher {
   private container: HTMLElement;
   
   // State
-  private years: number[] = [];
   private races: Race[] = [];
   private sessions: Session[] = [];
   private cachedRaces: CachedRaces = {};
   private selectedYear: number = 2024;
   private selectedRound: number = 0;
   private selectedSession: string = '';
-  private bearerToken: string = '';
+  private bearerToken: string = 'MCT';
   private isLoadingRaces: boolean = false;
   private isLoadingSessions: boolean = false;
   
   // Components
-  private terminal: Terminal;
   private renderSettings: RenderSettings;
   
   // Callback
@@ -54,16 +49,18 @@ export class DataFetcher {
   ) {
     this.container = container;
     this.onDataFetched = onDataFetched;
-    this.terminal = new Terminal(container);
     this.renderSettings = new RenderSettings(container);
     this.init();
   }
 
   private async init(): Promise<void> {
-    // Load only years list - don't auto-fetch races for faster initial load
-    this.years = await raceDataApi.getYears();
-    this.selectedYear = 0; // No year selected initially
-    
+    this.selectedYear = 2025;
+    this.isLoadingRaces = true;
+    this.render();
+
+    this.races = await raceDataApi.getRaces(2025);
+    this.cachedRaces = await raceDataApi.getCachedStatus(2025);
+    this.isLoadingRaces = false;
     this.render();
   }
 
@@ -78,11 +75,8 @@ export class DataFetcher {
           <div class="divider"></div>
         </div>
 
-        ${renderYearSelector(this.years, this.selectedYear)}
         ${renderRaceSelector(this.races, this.selectedRound, this.cachedRaces, this.isLoadingRaces)}
         ${renderSessionSelector(this.sessions, this.selectedSession, this.selectedRound, this.cachedRaces, this.isLoadingSessions)}
-        ${renderAuthSection(this.bearerToken)}
-        ${this.terminal.render()}
 
         <div id="message-container"></div>
 
@@ -92,7 +86,6 @@ export class DataFetcher {
       </div>
     `;
 
-    this.terminal.init();
     this.attachEventListeners();
     this.renderSettings.attachEventListeners();
     this.updateButtonState();
@@ -111,32 +104,8 @@ export class DataFetcher {
     const button = this.container.querySelector('#fetch-button') as HTMLButtonElement;
     button?.addEventListener('click', () => this.handleFetch());
 
-    // Bearer token input
-    this.setupTokenInput();
-
     // Option cards (year, race, session selection)
     this.setupOptionCards();
-  }
-
-  private setupTokenInput(): void {
-    const tokenInput = this.container.querySelector('#bearer-token-input') as HTMLInputElement;
-    if (!tokenInput) return;
-
-    tokenInput.addEventListener('input', (e) => {
-      this.bearerToken = (e.target as HTMLInputElement).value;
-      if (this.bearerToken) {
-        localStorage.setItem('f1_bearer_token', this.bearerToken);
-      } else {
-        localStorage.removeItem('f1_bearer_token');
-      }
-    });
-    
-    // Load saved token
-    const savedToken = localStorage.getItem('f1_bearer_token');
-    if (savedToken) {
-      this.bearerToken = savedToken;
-      tokenInput.value = savedToken;
-    }
   }
 
   private setupOptionCards(): void {
@@ -218,48 +187,29 @@ export class DataFetcher {
       this.showMessage(messageContainer, 'Please select a Grand Prix and Session first', 'error');
       return;
     }
-    
-    if (!this.bearerToken || this.bearerToken.trim() === '') {
-      this.showMessage(messageContainer, 'Please enter a Bearer token for authentication', 'error');
-      return;
-    }
 
     // Start loading
     button.disabled = true;
     button.innerHTML = '<span class="loading-spinner"></span>LOADING...';
     messageContainer.innerHTML = '';
 
-    this.terminal.show();
-    this.terminal.clear();
-    this.terminal.setupWebSocketLogListener();
-
     try {
       // Check if data exists
-      this.terminal.log('Checking data...', 'info');
       const exists = await raceDataApi.checkDataExists(year, round, sessionType);
 
       if (!exists) {
         // Fetch from FastF1
-        this.terminal.log('Fetching from FastF1...', 'info');
         const fetchResult = await raceDataApi.fetchData(year, round, sessionType, this.bearerToken);
         
         if (!fetchResult.success) {
           throw new Error(fetchResult.error || 'Failed to fetch data');
         }
-        this.terminal.log('✓ Data fetched successfully', 'success');
-      } else {
-        this.terminal.log('✓ Using cached data', 'success');
       }
 
       // Load telemetry
-      this.terminal.log('Loading telemetry...', 'info');
       const loadData = await raceDataApi.loadTelemetry(year, round, sessionType, this.bearerToken);
 
       if (loadData.success) {
-        this.terminal.log(`✓ Loaded ${loadData.totalFrames.toLocaleString()} frames`, 'success');
-        this.terminal.log(`✓ ${loadData.drivers.length} drivers loaded`, 'success');
-        this.terminal.log('Starting visualization...', 'info');
-        
         this.showMessage(messageContainer, '✓ Data loaded successfully', 'success');
 
         // Wait a moment, then initialize visualization
@@ -274,7 +224,6 @@ export class DataFetcher {
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      this.terminal.log(`✗ Error: ${errorMessage}`, 'error');
       this.showMessage(messageContainer, `✗ ${errorMessage}`, 'error');
       
       // Re-enable button on error

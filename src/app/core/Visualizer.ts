@@ -162,7 +162,7 @@ export class Visualizer {
     if (renderSettings) {
       renderSettings.onSettingsChange(async (settings) => {
         if (this.currentMetadata && this.carsReady) {
-          console.log('🔄 Render settings changed, reloading cars...');
+
           this.carRenderer.setCarRenderMode(settings.carRenderMode);
           await this.carRenderer.initializeCars(this.currentMetadata);
         }
@@ -181,11 +181,11 @@ export class Visualizer {
 
     // Connection handlers
     this.wsClient.onConnected(() => {
-      console.log('✅ WebSocket connected - ready for playback');
+
     });
 
     this.wsClient.onDisconnected(() => {
-      console.warn('⚠️ WebSocket disconnected');
+
     });
 
     // Leaderboard driver selection for POV
@@ -203,7 +203,7 @@ export class Visualizer {
     // Streaming mode changes - update interpolation interval
     this.wsClient.onModeChange((_mode, config) => {
       if (config?.interval) {
-        console.log(`📡 Updating interpolation interval to ${config.interval}ms`);
+
         this.carRenderer.setUpdateInterval(config.interval);
       }
     });
@@ -211,13 +211,13 @@ export class Visualizer {
     // Interpolation toggle from dropdown (for comparing with/without smoothing)
     window.addEventListener('interpolation-mode-change', ((event: CustomEvent) => {
       const { enabled } = event.detail;
-      console.log(`🔀 Interpolation mode: ${enabled ? 'enabled' : 'disabled'}`);
+
       this.carRenderer.setInterpolationEnabled(enabled);
     }) as EventListener);
   }
 
   private async handleMetadata(metadata: TelemetryMetadata, renderSettings: any): Promise<void> {
-    console.log('📊 Received metadata:', metadata);
+
     this.currentMetadata = metadata;
     
     this.loadingOverlay.setText('Loading 3D car models...');
@@ -242,7 +242,7 @@ export class Visualizer {
     // Handle qualifying mode
     if ((metadata.sessionType === 'Q' || metadata.sessionType === 'SQ') && metadata.qualifying) {
       const isSprint = metadata.sessionType === 'SQ';
-      console.log(`🏁 ${isSprint ? 'Sprint ' : ''}Qualifying session detected - enabling qualifying mode`);
+
       this.leaderboard.setQualifyingData(metadata.qualifying, isSprint);
     } else {
       this.leaderboard.setSessionMode('race');
@@ -251,7 +251,7 @@ export class Visualizer {
     // Cars are now ready
     this.carsReady = true;
     if (this.pendingFrame) {
-      console.log('📍 Applying pending first frame to position cars');
+
       this.carRenderer.updatePositions(this.pendingFrame);
       this.leaderboard.updateFromFrame(this.pendingFrame);
       this.weatherWidget.updateFromFrame(this.pendingFrame);
@@ -292,7 +292,7 @@ export class Visualizer {
     const car = this.carRenderer.getCar(code);
     const mount = this.carRenderer.getCameraMount(code);
     if (car) {
-      console.log(`🎥 Switching to POV view for: ${code}`);
+
       this.povCamera.setTarget(car, mount);
       this.povCamera.activate();
       this.povOverlay.show(code);
@@ -302,7 +302,7 @@ export class Visualizer {
   }
 
   private exitPOV(): void {
-    console.log('🎥 Exiting POV view');
+
     this.povCamera.deactivate();
     this.povOverlay.hide();
     this.leaderboard.setSelectedDriver(null);
@@ -313,7 +313,7 @@ export class Visualizer {
     try {
       await this.wsClient.connect();
     } catch (error) {
-      console.error('Failed to connect to WebSocket server:', error);
+
       alert('Failed to connect to streaming server. Make sure the Node.js server is running on port 3001.');
     }
   }

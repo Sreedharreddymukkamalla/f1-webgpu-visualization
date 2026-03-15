@@ -1,0 +1,23 @@
+{
+  "name": "Basic WebSpatial",
+  "short_name": "WebSpatial",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "xr_main_scene": {
+    "default_size": {
+      "width": 500,
+      "height": 1000
+    }
+  }
+}

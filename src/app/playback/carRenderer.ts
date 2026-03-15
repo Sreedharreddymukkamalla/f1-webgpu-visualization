@@ -85,7 +85,7 @@ export class CarRenderer {
           const model = await this.loadModel(TEAM_MODEL_PATHS[teamKey]);
           this.loadedModels.set(teamKey, model);
         } catch (error) {
-          console.error(`Failed to load model for ${teamKey}:`, error);
+
         }
       }
     } else {
@@ -169,7 +169,7 @@ export class CarRenderer {
       this.lowPolyBaseModel = model;
       return model;
     } catch (error) {
-      console.error('Failed to load low-poly base model:', error);
+
       return null;
     }
   }

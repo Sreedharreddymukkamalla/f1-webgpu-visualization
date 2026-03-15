@@ -12,8 +12,8 @@ export class RacingLine {
    * Stub: Load racing line (will be replaced with telemetry-based animation)
    */
   async load(_circuitName: string, _rotation?: number): Promise<void> {
-    console.warn('⚠️ RacingLine.load() is a stub - cars will not move yet');
-    console.warn('   TODO: Implement telemetry-based car animation');
+
+
 
     // Create a simple circular path as placeholder
     const radius = 100;

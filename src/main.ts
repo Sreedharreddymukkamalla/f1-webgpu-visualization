@@ -19,10 +19,10 @@ function init(): void {
   uiContainer.appendChild(fetcherContainer);
 
   new DataFetcher(fetcherContainer, async (year: number, round: number, sessionType: string, trackData: TrackData) => {
-    console.log(`✅ Data fetched for ${year} Round ${round} - ${sessionType}`);
+
 
     if (!trackData) {
-      console.error('❌ No track data received from backend');
+
       return;
     }
 
@@ -30,7 +30,7 @@ function init(): void {
       const visualizer = new Visualizer();
       await visualizer.init(trackData);
     } catch (error) {
-      console.error('Failed to initialize visualization:', error);
+
       document.body.innerHTML = `
         <div style="padding: 20px; color: red;">
           <h2>❌ Failed to initialize visualization</h2>

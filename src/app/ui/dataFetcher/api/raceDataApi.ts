@@ -18,7 +18,7 @@ export class RaceDataApi {
       }
       return [2024, 2023, 2022]; // Fallback
     } catch (error) {
-      console.error('Failed to load years:', error);
+
       return [2024, 2023, 2022];
     }
   }
@@ -35,7 +35,7 @@ export class RaceDataApi {
       }
       return [];
     } catch (error) {
-      console.error('Failed to load races:', error);
+
       return [];
     }
   }
@@ -52,7 +52,7 @@ export class RaceDataApi {
       }
       return this.getDefaultSessions();
     } catch (error) {
-      console.error('Failed to load sessions:', error);
+
       return this.getDefaultSessions();
     }
   }
@@ -69,7 +69,7 @@ export class RaceDataApi {
       }
       return {};
     } catch (error) {
-      console.error('Failed to load cache status:', error);
+
       return {};
     }
   }

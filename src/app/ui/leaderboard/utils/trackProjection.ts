@@ -51,7 +51,7 @@ export class TrackProjection {
     this._ref_cumdist = new Float32Array(cumdist);
     this._ref_total_length = this._ref_cumdist.length > 0 ? this._ref_cumdist[this._ref_cumdist.length - 1] : 0.0;
 
-    console.log(`✓ Leaderboard reference track loaded: ${this._ref_total_length.toFixed(2)}m`);
+
   }
 
   /**

@@ -17,7 +17,7 @@ export class CircuitManager {
   async loadTrackFromTelemetry(trackData: TrackData): Promise<void> {
     try {
       if (!trackData) {
-        console.warn('No track data provided for rendering.');
+
         return;
       }
 
@@ -25,7 +25,7 @@ export class CircuitManager {
       this.adjustCameraToTrack(trackData.bounds);
       this.currentTrack = this.trackRenderer.getBounds() ? new THREE.Group() : null;
     } catch (error) {
-      console.error('Error loading track from telemetry:', error);
+
       throw error;
     }
   }
@@ -39,7 +39,7 @@ export class CircuitManager {
     const sizeX = x_max - x_min;
     const sizeZ = y_max - y_min;
 
-    console.log(`📐 Track bounds: X[${x_min.toFixed(0)}, ${x_max.toFixed(0)}] Y[${y_min.toFixed(0)}, ${y_max.toFixed(0)}]`);
+
 
     const diagonal = Math.sqrt(sizeX * sizeX + sizeZ * sizeZ);
     const fov = this.camera.fov * (Math.PI / 180);
@@ -51,7 +51,7 @@ export class CircuitManager {
     this.controls.target.set(centerX, 0, centerZ);
     this.controls.update();
 
-    console.log(`✅ Camera positioned at (${centerX.toFixed(0)}, ${cameraHeight.toFixed(0)}, ${centerZ.toFixed(0)})`);
+
   }
 
   getCurrentTrack(): THREE.Group | null {

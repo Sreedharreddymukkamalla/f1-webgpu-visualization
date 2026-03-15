@@ -77,7 +77,7 @@ export class PlaybackUI {
         this.wsClient.setSpeed(boundedSpeed);
         break;
       case 'changeStreamingMode':
-        console.log(`🔄 Streaming mode changed to: ${value}`);
+
         // Handle direct (no interpolation) vs interpolated modes
         if (value.endsWith('-direct')) {
           // Direct mode: strip suffix and send base mode to server

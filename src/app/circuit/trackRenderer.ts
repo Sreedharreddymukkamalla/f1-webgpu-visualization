@@ -61,7 +61,7 @@ export class TrackRenderer {
     this.renderDRSZones(trackData);
     await this.renderStadiumGrandstands(trackData);
     
-    console.log(`✓ Track rendered: ${trackData.centerline.x.length} points, ${trackData.drs_zones?.length || 0} DRS zones`);
+
   }
 
   private async renderTrackSurface(trackData: TrackData): Promise<void> {
@@ -126,7 +126,7 @@ export class TrackRenderer {
     asphaltTexture.wrapT = THREE.RepeatWrapping;
     asphaltTexture.colorSpace = THREE.SRGBColorSpace;
     
-    console.log('✓ Asphalt texture loaded');
+
 
     // Use MeshBasicMaterial (unlit) since scene may lack sufficient lighting
     const material = new THREE.MeshBasicMaterial({
@@ -295,7 +295,7 @@ export class TrackRenderer {
       this.trackGroup.add(mesh);
     });
 
-    console.log(`✓ Rendered ${trackData.drs_zones.length} DRS zones (green flat ribbons)`);
+
   }
 
 
@@ -310,7 +310,7 @@ export class TrackRenderer {
         this.gltfLoader.load('/files/Stadium.glb', resolve, undefined, reject);
       });
     } catch (err) {
-      console.warn('Stadium.glb could not be loaded:', err);
+
       return;
     }
 
@@ -369,7 +369,7 @@ export class TrackRenderer {
       this.trackGroup.add(stand);
     }
 
-    console.log(`✓ Placed ${GRANDSTAND_COUNT} stadium grandstands around the track (scale=${modelScale.toFixed(1)}, standoff=${standoffDistance.toFixed(1)})`);
+
   }
 
   getBounds(): { min: THREE.Vector3; max: THREE.Vector3 } | null {

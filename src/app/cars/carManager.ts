@@ -70,7 +70,7 @@ export class CarManager {
     // Create UI for cars
     this.createUI();
 
-    console.log(`✓ Cars loaded on racing line: ${circuitName}`);
+
   }
 
   /**
@@ -161,10 +161,10 @@ export class CarManager {
 
     const onFinish = (carName: string) => {
       finished++;
-      console.log(`🏁 ${carName} finished! (Position: ${finished}/${totalCars})`);
+
 
       if (finished === totalCars) {
-        console.log('🏆 Race completed!');
+
         // Re-enable controls after race
         setTimeout(() => {
           this.cars.forEach((car) => {

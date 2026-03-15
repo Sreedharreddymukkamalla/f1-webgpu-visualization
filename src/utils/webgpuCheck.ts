@@ -6,7 +6,7 @@ import WebGPU from 'three/addons/capabilities/WebGPU.js';
  */
 export function checkWebGPUSupport(): void {
   if (!WebGPU.isAvailable()) {
-    console.warn('WebGPU not available — falling back to WebGL2 renderer.');
+
   }
 }
 
